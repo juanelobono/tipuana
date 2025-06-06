@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Redirección de la App Tipuana</title>
+<script type="text/javascript">
+  function redirectBasedOnDevice() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var playStoreUrl = "https://play.google.com/store/apps/details?id=com.nexosoluciones.tipuana2&hl=es_AR";
+    var appStoreUrl = "https://apps.apple.com/ar/app/tipuana/id6746048258";
+
+    // Para iOS
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.href = appStoreUrl;
+    }
+    // Para Android
+    else if (/android/i.test(userAgent)) {
+      window.location.href = playStoreUrl;
+    }
+    // Para otros dispositivos (como una computadora de escritorio)
+    else {
+      document.getElementById("message").innerHTML = "Escanea el código QR desde tu dispositivo móvil para descargar la aplicación Tipuana.";
+      document.getElementById("playStoreLink").href = playStoreUrl;
+      document.getElementById("appStoreLink").href = appStoreUrl;
+      document.getElementById("desktopLinks").style.display = "block";
+    }
+  }
+
+  // Ejecuta la función cuando la página se haya cargado
+  window.onload = redirectBasedOnDevice;
+</script>
+</head>
+<body>
+  <p id="message" style="text-align: center; margin-top: 50px;"></p>
+  <div id="desktopLinks" style="display: none; text-align: center;">
+    <p>Descarga la aplicación Tipuana:</p>
+    <a id="playStoreLink" href="#" target="_blank">Descargar en Google Play</a><br><br>
+    <a id="appStoreLink" href="#" target="_blank">Descargar en App Store</a>
+  </div>
+</body>
+</html>
